@@ -23,7 +23,9 @@ class Simulator:
         self._queue = []
         self._next_arrival_time = 0
         self._service_start_time = -1
-        self._tick_duration = 1000
+        self._tick_duration = 1000000
+
+        self._packets_dropped = 0
 
         self._service_time = int(packet_length / float(transmission_rate) * self._tick_duration)
         print(self._service_time)
@@ -40,23 +42,34 @@ class Simulator:
         """
         return True
 
-    def _departure(selfs, tick):
+    def _departure(self, tick):
         """
         TODO: Handle departure of tick
         """
         return True
 
-    def _metrics(selfs):
+    def _metrics(self):
         """
         TODO: Compute metrics after simulation
         """
-        print('running metrics')
+        print('Finished Running Metrics')
         return True
+
+    def _packet_generator(self, tick):
+        if tick > self._next_arrival_time:
+            distribution = self._exponential_rand(self._packet_per_second)
+            tick_duration = self._tick_duration
+            self._next_arrival_time += int(distribution * tick_duration)
+            return True
+        else:
+            return False
 
     def simulate(self, tick):
         # Run Simulation
         for i in xrange(0, tick * self._tick_duration):
             print(i)
+            if self._packet_generator(i):
+                print('Packet Generated ' + str(self._next_arrival_time))
             self._arrival(i)
             self._departure(i)
 
