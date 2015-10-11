@@ -137,6 +137,17 @@ class Simulator:
 
 
 def main(argv):
+    if argv[1] == '-h':
+        print('\n//////////////////////////////////')
+        print('python lab1.py Tick Lambda L C K')
+        print('//////////////////////////////////')
+        print('\nTick - Duration of the experiment in units of tick')
+        print('\nLambda - Average number of packets generated/arrived')
+        print('\nL - Length of packet in bits')
+        print('\nC - Service time by single packet (transmission rate of the output link in bits per second)')
+        print('\nK (optional) - Size of buffer, infinite if None\n')
+        sys.exit(0)
+
     if len(argv) == 5:
         ticks = int(argv[1])
         Lambda = int(argv[2])
