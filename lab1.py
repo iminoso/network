@@ -109,10 +109,16 @@ class Simulator:
         # Ratio of loss packets dude to filled queue
         P_loss = self._packets_dropped / (float(self._packets_dropped + self._packets_serviced))
 
-        print('E_n = ' + str(E_n))
-        print('E_t = ' + str(E_t))
-        print('P_idle = ' + str(P_idle))
-        print('P_loss = ' + str(P_loss))
+        print('E_n (Average number of packets in the buffer/queue) = ' + str(E_n))
+        print(
+            'E_t (Average Sojurn time - Total time, including '
+            'queuing delay + service, spent by the packet in the system) = ' + str(
+                E_t))
+        print('P_idle (Proportion of time the service is idle) = ' + str(P_idle))
+        print(
+            'P_loss (The packet loss probability, the ratio of the total '
+            'number of packets lost dude to the buffer being full) = ' + str(
+                P_loss))
 
     def simulate(self, tick):
         # Run Simulation
@@ -148,16 +154,19 @@ def main(argv):
         print('\nK (optional) - Size of buffer, infinite if None\n')
         sys.exit(0)
 
-    if len(argv) == 5:
-        ticks = int(argv[1])
-        Lambda = int(argv[2])
-        L = int(argv[3])
-        C = int(argv[4])
+    if len(argv) < 5:
+        print('Invalid arguments, use -h argument for help usage in program')
+        sys.exit(0)
 
     if len(argv) > 5:
         K = int(argv[5])
     else:
         K = None
+
+    ticks = int(argv[1])
+    Lambda = int(argv[2])
+    L = int(argv[3])
+    C = int(argv[4])
 
     test = Simulator(Lambda, L, C, K)
     test.simulate(ticks)
