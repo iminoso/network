@@ -106,7 +106,7 @@ class Simulator:
         # Proportion of time the queue is empty
         P_idle = self._idle_time / float(tick) * 100
 
-        # Ratio of loss packets dude to filled queue
+        # Ratio of loss packets due to filled queue
         P_loss = self._packets_dropped / (float(self._packets_dropped + self._packets_serviced))
 
         print('E_n (Average number of packets in the buffer/queue) = ' + str(E_n))
@@ -117,7 +117,7 @@ class Simulator:
         print('P_idle (Proportion of time the service is idle) = ' + str(P_idle))
         print(
             'P_loss (The packet loss probability, the ratio of the total '
-            'number of packets lost dude to the buffer being full) = ' + str(
+            'number of packets lost due to the buffer being full) = ' + str(
                 P_loss))
 
     def simulate(self, tick):
