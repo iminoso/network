@@ -53,15 +53,16 @@ class Node:
         # potential opt
         while dest == self.id:
             dest = random.randint(0, self.num_nodes - 1)
-
         return dest
 
     def generate(self, tick):
         gen = Generator(self.rate)
         packet_generated = gen.generate_packet(tick, self.next_arrival)
         if packet_generated:
-            self.queue.append(tick)
             self.next_arrival = packet_generated
+            return self.packet_dest()
+
+        return None
 
 
 class Simulator:
@@ -100,14 +101,20 @@ class Simulator:
                 percentage_done += 10
 
             for node in network:
-                node.generate(i)
+                dest = node.generate(i)
+                if dest is not None:
+                    network[dest].queue.append(i)
+
+
 
         print('100% Complete')
 
+        for node in network:
+            print node.queue
 
 def main(argv):
     ticks = 1
-    n = 100
+    n = 20
     a = 5
     w = 1000000
     l = 15000
