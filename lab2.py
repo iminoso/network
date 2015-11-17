@@ -18,6 +18,46 @@ import random
 TICK_DURATION = 1000000
 
 
+class Bus:
+    def __init__(self, num_nodes):
+        self.line = [True] * num_nodes
+        self.start = 0
+        self.end = 0
+        self.packet_length = 12000
+        self.speed = 1000000
+        self.block_time = 0
+
+    def is_line_open(self, src, dest):
+        if src > dest:
+            current_line = self.line[dest:src + 1]
+            check = [True] * (src - dest + 1)
+            return current_line == check
+
+        current_line = self.line[src:dest + 1]
+        check = [True] * (dest - src + 1)
+        return current_line == check
+
+    def block_line(self, src, dest):
+        if src > dest:
+            self.line[dest:src + 1] = [False] * (src - dest + 1)
+            self.start = dest
+            self.end = src
+        else:
+            self.line[src:dest + 1] = [False] * (dest - src + 1)
+            self.start = src
+            self.end = dest
+
+    def open_line(self):
+        self.line[self.start:self.end + 1] = [True] * (self.end - self.start + 1)
+
+    def set_block_time(self, tick):
+        self.block_time = tick
+
+    def check_line_block(self, tick):
+        if (tick - self.block_time) > 90:
+            self.open_line()
+
+
 class Generator:
     def __init__(self, packets_per_second):
         self.packets_per_second = packets_per_second
@@ -46,6 +86,7 @@ class Node:
         self.num_nodes = num_nodes
         self.next_arrival = 0
         self.queue = []
+        self.transmission_ctr = 0
 
     def packet_dest(self):
         dest = self.id
@@ -60,7 +101,10 @@ class Node:
         packet_generated = gen.generate_packet(tick, self.next_arrival)
         if packet_generated:
             self.next_arrival = packet_generated
-            return self.packet_dest()
+            dest = self.packet_dest()
+
+            # self.transmission_ctr = abs(dest - self.id) /
+            return dest
 
         return None
 
@@ -88,6 +132,7 @@ class Simulator:
         percentage_done = 0
 
         network = []
+        bus = Bus(self.number_computers)
 
         # init network
         for i in xrange(0, self.number_computers):
@@ -103,14 +148,23 @@ class Simulator:
             for node in network:
                 dest = node.generate(i)
                 if dest is not None:
-                    network[dest].queue.append(i)
+                    # checking if the bus is busy from src - dest
+                    # if blocked prior, check if random wait time is complete
+                    if bus.is_line_open(node.id, dest):
+                        network[dest].queue.append(i)
+                        bus.block_line(node.id, dest)
+                        bus.set_block_time(i)
+                    else:
+                        # bus is blocked here, add random waits
 
-
+                        # after transmission ctr is done
+                        bus.check_line_block(i)
 
         print('100% Complete')
 
         for node in network:
             print node.queue
+
 
 def main(argv):
     ticks = 1
