@@ -17,45 +17,42 @@ import random
 # Tick Duration definition
 TICK_DURATION = 1000000
 
+TRANSMISSION_DURATION = 90
+
 
 class Bus:
-    def __init__(self, num_nodes):
-        self.line = [True] * num_nodes
-        self.start = 0
-        self.end = 0
-        self.packet_length = 12000
-        self.speed = 1000000
-        self.block_time = 0
+    def __init__(self, network):
+        self.line = network
 
     def is_line_open(self, src, dest):
+        start = src
+        end = dest
         if src > dest:
-            current_line = self.line[dest:src + 1]
-            check = [True] * (src - dest + 1)
-            return current_line == check
+            start = dest
+            end = src
 
-        current_line = self.line[src:dest + 1]
-        check = [True] * (dest - src + 1)
-        return current_line == check
+        for i in xrange(start, end + 1):
+            if self.line[i].is_busy:
+                return False
 
-    def block_line(self, src, dest):
+        return True
+
+    def block_line(self, src, dest, tick):
+        start = src
+        end = dest
         if src > dest:
-            self.line[dest:src + 1] = [False] * (src - dest + 1)
-            self.start = dest
-            self.end = src
-        else:
-            self.line[src:dest + 1] = [False] * (dest - src + 1)
-            self.start = src
-            self.end = dest
+            start = dest
+            end = src
 
-    def open_line(self):
-        self.line[self.start:self.end + 1] = [True] * (self.end - self.start + 1)
+        for i in xrange(start, end + 1):
+            self.line[i].is_busy = True
+            self.line[i].block_time = tick
 
-    def set_block_time(self, tick):
-        self.block_time = tick
-
-    def check_line_block(self, tick):
-        if (tick - self.block_time) > 90:
-            self.open_line()
+    def try_unblock(self, tick):
+        for node in self.line:
+            if node.is_busy:
+                if tick - node.block_time > TRANSMISSION_DURATION:  # transmission time
+                    node.is_busy = False
 
 
 class Generator:
@@ -87,6 +84,7 @@ class Node:
         self.next_arrival = 0
         self.queue = []
         self.transmission_ctr = 0
+        self.is_busy = False
 
     def packet_dest(self):
         dest = self.id
@@ -132,11 +130,12 @@ class Simulator:
         percentage_done = 0
 
         network = []
-        bus = Bus(self.number_computers)
 
         # init network
         for i in xrange(0, self.number_computers):
             network.append(Node(i, self.packet_rate, self.packet_length, self.number_computers))
+
+        bus = Bus(network)
 
         # sim loop
         for i in xrange(0, tick * TICK_DURATION):
@@ -152,13 +151,12 @@ class Simulator:
                     # if blocked prior, check if random wait time is complete
                     if bus.is_line_open(node.id, dest):
                         network[dest].queue.append(i)
-                        bus.block_line(node.id, dest)
-                        bus.set_block_time(i)
+                        bus.block_line(node.id, dest, i)
                     else:
+                        pass
                         # bus is blocked here, add random waits
 
-                        # after transmission ctr is done
-                        bus.check_line_block(i)
+            bus.try_unblock(i)
 
         print('100% Complete')
 
@@ -168,7 +166,7 @@ class Simulator:
 
 def main(argv):
     ticks = 1
-    n = 20
+    n = 10
     a = 5
     w = 1000000
     l = 15000
