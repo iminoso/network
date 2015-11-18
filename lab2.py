@@ -153,7 +153,7 @@ class Simulator:
 
     def simulate(self, tick):
 
-        percentage_fraction = tick * TICK_DURATION / 20
+        percentage_fraction = tick * TICK_DURATION / 4
         percentage_done = 0
 
         network = []
@@ -169,7 +169,7 @@ class Simulator:
 
             if i % percentage_fraction == 0:
                 print(str(percentage_done) + '% Complete')
-                percentage_done += 5
+                percentage_done += 25
 
             for node in network:
                 if not node.has_packet:
@@ -203,7 +203,7 @@ class Simulator:
         total_processing_time = 0
         for node in network:
             total_processing_time += sum(node.queue)
-            print node.queue
+            # print node.queue
 
         throughput = float(self.transmitted_ctr * self.packet_length * 8) / (tick * TICK_DURATION)
         avg_delay = float(total_processing_time) / self.transmitted_ctr
@@ -217,14 +217,43 @@ class Simulator:
 
 def main(argv):
     ticks = 1
-    n = 100
-    a = 5
+
+    test_1(ticks)
+    test_2(ticks)
+
+def test_1(ticks):
     w = 1000000
     l = 15000
 
-    test = Simulator(n, a, w, l, None)
-    test.simulate(ticks)
+    N1=[20, 40, 60, 80, 100]
+    A1=[5,6,7]
 
+    print "----- Running test 1 -----"
+    for n in N1:
+        for a in A1:
+            test = Simulator(n, a, w, l, None)
+            print "n = {}, a = {}".format(n, a)
+            test.simulate(ticks)
+            print ""
+    print "----- Finished test 1 -----"
+
+
+def test_2(ticks):
+    w = 1000000
+    l = 15000
+
+    A2=[4, 8, 12, 16, 20]
+    N2=[20, 30, 40]
+    
+    print "----- Running test 2 -----"
+    for a in A2:
+        for n in N2:
+            test = Simulator(n, a, w, l, None)
+            print "n = {}, a = {}".format(n, a)
+            test.simulate(ticks)
+            print ""
+    print "----- Finished test 2 -----"
 
 if __name__ == "__main__":
     main(sys.argv)
+
