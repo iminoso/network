@@ -17,7 +17,10 @@ import random
 # Tick Duration definition
 TICK_DURATION = 1000000
 
+# TODO FIX THIS?
 TRANSMISSION_DURATION = 90
+
+TP = 512
 
 
 class Bus:
@@ -85,6 +88,10 @@ class Node:
         self.queue = []
         self.transmission_ctr = 0
         self.is_busy = False
+        self.random_wait_time = 0
+        self.retry_ctr = 0
+        self.has_packet = False
+        self.dest = None
 
     def packet_dest(self):
         dest = self.id
@@ -101,8 +108,23 @@ class Node:
             self.next_arrival = packet_generated
             dest = self.packet_dest()
 
-            # self.transmission_ctr = abs(dest - self.id) /
-            return dest
+            self.dest = dest
+            self.has_packet = True
+
+        return None
+
+    def backoff(self):
+        self.retry_ctr += 1
+
+        # aborting packet
+        if self.retry_ctr > 10:
+            self.has_packet = False
+            self.retry_ctr = 0
+            self.dest = None
+            return True
+
+        r = random.randint(0, math.pow(2, self.retry_ctr - 1))
+        self.random_wait_time = r * TP
 
         return None
 
@@ -115,6 +137,11 @@ class Simulator:
         self.packet_length = packet_length
         self.p = p
 
+        # metrics
+        self.abort_ctr = 0
+        self.collison_ctr = 0
+        self.transmitted_ctr = 0
+
     def _arrival(self, tick):
         pass
 
@@ -126,7 +153,7 @@ class Simulator:
 
     def simulate(self, tick):
 
-        percentage_fraction = tick * TICK_DURATION / 10
+        percentage_fraction = tick * TICK_DURATION / 20
         percentage_done = 0
 
         network = []
@@ -142,31 +169,55 @@ class Simulator:
 
             if i % percentage_fraction == 0:
                 print(str(percentage_done) + '% Complete')
-                percentage_done += 10
+                percentage_done += 5
 
             for node in network:
-                dest = node.generate(i)
-                if dest is not None:
+                if not node.has_packet:
+
+                    # try to generate a packet for this node
+                    # sets has_packet = true
+                    node.generate(i)
+                else:
                     # checking if the bus is busy from src - dest
                     # if blocked prior, check if random wait time is complete
-                    if bus.is_line_open(node.id, dest):
-                        network[dest].queue.append(i)
-                        bus.block_line(node.id, dest, i)
+                    if i > node.random_wait_time and node.dest is not None:
+                        if bus.is_line_open(node.id, node.dest):
+                            network[node.dest].queue.append(i)
+                            bus.block_line(node.id, node.dest, i)
+                            node.has_packet = False
+                            node.dest = None
+                            node.retry_ctr = 0
+                            self.transmitted_ctr += 1
+                        else:
+                            # bus is blocked here, add random waits
+                            if node.backoff():
+                                self.abort_ctr += 1
+                            self.collison_ctr += 1
                     else:
                         pass
-                        # bus is blocked here, add random waits
 
             bus.try_unblock(i)
 
         print('100% Complete')
 
+        total_processing_time = 0
         for node in network:
+            total_processing_time += sum(node.queue)
             print node.queue
+
+        throughput = float(self.transmitted_ctr * self.packet_length * 8) / (tick * TICK_DURATION)
+        avg_delay = float(total_processing_time) / self.transmitted_ctr
+
+        print "Throughput: {}".format(throughput)
+        print "Average Delay: {}".format(avg_delay)
+        print "Packets Transmitted: {}".format(self.transmitted_ctr)
+        print "Collisions: {}".format(self.collison_ctr)
+        print "Dropped: {}".format(self.abort_ctr)
 
 
 def main(argv):
     ticks = 1
-    n = 10
+    n = 100
     a = 5
     w = 1000000
     l = 15000
