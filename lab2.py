@@ -13,6 +13,7 @@ P (optional) - Persistence parameter for P-persistent
 import math
 import sys
 import random
+import datetime
 
 # Tick Duration definition
 TICK_DURATION = 1000000
@@ -153,7 +154,7 @@ class Simulator:
 
     def simulate(self, tick):
 
-        percentage_fraction = tick * TICK_DURATION / 4
+        percentage_fraction = tick * TICK_DURATION / 10
         percentage_done = 0
 
         network = []
@@ -169,7 +170,7 @@ class Simulator:
 
             if i % percentage_fraction == 0:
                 print(str(percentage_done) + '% Complete')
-                percentage_done += 25
+                percentage_done += 10
 
             for node in network:
                 if not node.has_packet:
@@ -208,18 +209,23 @@ class Simulator:
         throughput = float(self.transmitted_ctr * self.packet_length * 8) / (tick * TICK_DURATION)
         avg_delay = float(total_processing_time) / self.transmitted_ctr
 
-        print "Throughput: {}".format(throughput)
-        print "Average Delay: {}".format(avg_delay)
-        print "Packets Transmitted: {}".format(self.transmitted_ctr)
-        print "Collisions: {}".format(self.collison_ctr)
-        print "Dropped: {}".format(self.abort_ctr)
+        text_file.write("Throughput: {} \n".format(throughput))
+        text_file.write("Average Delay: {} \n".format(avg_delay))
+        text_file.write("Packets Transmitted: {} \n".format(self.transmitted_ctr))
+        text_file.write("Collisions: {} \n".format(self.collison_ctr))
+        text_file.write("Dropped: {} \n".format(self.abort_ctr))
 
 
 def main(argv):
     ticks = 1
 
+    text_file.write("----- Running test 1 and 3 -----\n")
     test_1(ticks)
+    text_file.write("----- Finished test 1 and 3 -----\n")
+
+    text_file.write("----- Running test 2 and 4 -----\n")
     test_2(ticks)
+    text_file.write("----- Finished test 2 and 4 -----\n")
 
 def test_1(ticks):
     w = 1000000
@@ -228,14 +234,16 @@ def test_1(ticks):
     N1=[20, 40, 60, 80, 100]
     A1=[5,6,7]
 
-    print "----- Running test 1 -----"
+    print "----- Running test 1 and 3 -----"
     for n in N1:
         for a in A1:
             test = Simulator(n, a, w, l, None)
             print "n = {}, a = {}".format(n, a)
+            text_file.write("n = {}, a = {}\n".format(n, a))
             test.simulate(ticks)
             print ""
-    print "----- Finished test 1 -----"
+            text_file.write("\n")
+    print "----- Finished test 1 and 3 -----"
 
 
 def test_2(ticks):
@@ -245,15 +253,21 @@ def test_2(ticks):
     A2=[4, 8, 12, 16, 20]
     N2=[20, 30, 40]
     
-    print "----- Running test 2 -----"
+    print "----- Running test 2 and 4 -----"
     for a in A2:
         for n in N2:
             test = Simulator(n, a, w, l, None)
             print "n = {}, a = {}".format(n, a)
+            text_file.write("n = {}, a = {}\n".format(n, a))
             test.simulate(ticks)
             print ""
-    print "----- Finished test 2 -----"
+            text_file.write("\n")
+    print "----- Finished test 2 and 4 -----"
 
 if __name__ == "__main__":
+    format = "%a %b %d %H:%M:%S"
+    today = datetime.datetime.today()
+    s = today.strftime(format)
+    text_file = open("trial_{}.txt".format(s),"w")
     main(sys.argv)
-
+    text_file.close()
