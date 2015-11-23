@@ -1,0 +1,352 @@
+----- Running test 3 -----
+p = 0.01, a = 1
+Throughput: 6.96 
+Average Delay: 247504.5 
+Packets Transmitted: 58 
+Collisions: 139 
+Dropped: 0 
+
+p = 0.1, a = 1
+Throughput: 7.68 
+Average Delay: 215196.90625 
+Packets Transmitted: 64 
+Collisions: 155 
+Dropped: 0 
+
+p = 0.3, a = 1
+Throughput: 6.48 
+Average Delay: 210039.796296 
+Packets Transmitted: 54 
+Collisions: 132 
+Dropped: 0 
+
+p = 0.6, a = 1
+Throughput: 7.68 
+Average Delay: 303769.703125 
+Packets Transmitted: 64 
+Collisions: 145 
+Dropped: 0 
+
+p = 1.0, a = 1
+Throughput: 7.8 
+Average Delay: 216813.353846 
+Packets Transmitted: 65 
+Collisions: 134 
+Dropped: 0 
+
+p = 0.01, a = 2
+Throughput: 13.44 
+Average Delay: 436864.491071 
+Packets Transmitted: 112 
+Collisions: 132 
+Dropped: 1 
+
+p = 0.1, a = 2
+Throughput: 14.16 
+Average Delay: 397046.050847 
+Packets Transmitted: 118 
+Collisions: 121 
+Dropped: 0 
+
+p = 0.3, a = 2
+Throughput: 13.92 
+Average Delay: 371774.784483 
+Packets Transmitted: 116 
+Collisions: 135 
+Dropped: 0 
+
+p = 0.6, a = 2
+Throughput: 13.68 
+Average Delay: 422658.842105 
+Packets Transmitted: 114 
+Collisions: 120 
+Dropped: 0 
+
+p = 1.0, a = 2
+Throughput: 13.68 
+Average Delay: 407316.184211 
+Packets Transmitted: 114 
+Collisions: 135 
+Dropped: 0 
+
+p = 0.01, a = 3
+Throughput: 21.6 
+Average Delay: 439096.038889 
+Packets Transmitted: 180 
+Collisions: 176 
+Dropped: 1 
+
+p = 0.1, a = 3
+Throughput: 22.44 
+Average Delay: 438044.989305 
+Packets Transmitted: 187 
+Collisions: 160 
+Dropped: 1 
+
+p = 0.3, a = 3
+Throughput: 20.4 
+Average Delay: 452682.964706 
+Packets Transmitted: 170 
+Collisions: 166 
+Dropped: 3 
+
+p = 0.6, a = 3
+Throughput: 19.8 
+Average Delay: 404839.854545 
+Packets Transmitted: 165 
+Collisions: 153 
+Dropped: 0 
+
+p = 1.0, a = 3
+Throughput: 20.52 
+Average Delay: 423702.426901 
+Packets Transmitted: 171 
+Collisions: 148 
+Dropped: 2 
+
+p = 0.01, a = 4
+Throughput: 28.08 
+Average Delay: 437659.547009 
+Packets Transmitted: 234 
+Collisions: 127 
+Dropped: 1 
+
+p = 0.1, a = 4
+Throughput: 28.68 
+Average Delay: 423940.627615 
+Packets Transmitted: 239 
+Collisions: 262 
+Dropped: 6 
+
+p = 0.3, a = 4
+Throughput: 26.64 
+Average Delay: 444140.463964 
+Packets Transmitted: 222 
+Collisions: 222 
+Dropped: 4 
+
+p = 0.6, a = 4
+Throughput: 27.48 
+Average Delay: 461375.170306 
+Packets Transmitted: 229 
+Collisions: 186 
+Dropped: 3 
+
+p = 1.0, a = 4
+Throughput: 29.4 
+Average Delay: 439580.118367 
+Packets Transmitted: 245 
+Collisions: 175 
+Dropped: 2 
+
+p = 0.01, a = 5
+Throughput: 34.68 
+Average Delay: 458496.155709 
+Packets Transmitted: 289 
+Collisions: 185 
+Dropped: 7 
+
+p = 0.1, a = 5
+Throughput: 36.84 
+Average Delay: 473015.234528 
+Packets Transmitted: 307 
+Collisions: 197 
+Dropped: 3 
+
+p = 0.3, a = 5
+Throughput: 34.08 
+Average Delay: 462634.397887 
+Packets Transmitted: 284 
+Collisions: 185 
+Dropped: 5 
+
+p = 0.6, a = 5
+Throughput: 37.2 
+Average Delay: 468233.925806 
+Packets Transmitted: 310 
+Collisions: 196 
+Dropped: 4 
+
+p = 1.0, a = 5
+Throughput: 35.16 
+Average Delay: 448440.627986 
+Packets Transmitted: 293 
+Collisions: 170 
+Dropped: 3 
+
+p = 0.01, a = 6
+Throughput: 40.92 
+Average Delay: 461148.504399 
+Packets Transmitted: 341 
+Collisions: 336 
+Dropped: 18 
+
+p = 0.1, a = 6
+Throughput: 42.48 
+Average Delay: 468841.748588 
+Packets Transmitted: 354 
+Collisions: 206 
+Dropped: 6 
+
+p = 0.3, a = 6
+Throughput: 42.0 
+Average Delay: 483247.18 
+Packets Transmitted: 350 
+Collisions: 216 
+Dropped: 6 
+
+p = 0.6, a = 6
+Throughput: 41.4 
+Average Delay: 468102.055072 
+Packets Transmitted: 345 
+Collisions: 202 
+Dropped: 4 
+
+p = 1.0, a = 6
+Throughput: 44.28 
+Average Delay: 475121.723577 
+Packets Transmitted: 369 
+Collisions: 241 
+Dropped: 8 
+
+p = 0.01, a = 7
+Throughput: 50.04 
+Average Delay: 469800.153477 
+Packets Transmitted: 417 
+Collisions: 307 
+Dropped: 13 
+
+p = 0.1, a = 7
+Throughput: 49.56 
+Average Delay: 463746.27845 
+Packets Transmitted: 413 
+Collisions: 258 
+Dropped: 7 
+
+p = 0.3, a = 7
+Throughput: 48.84 
+Average Delay: 468920.36855 
+Packets Transmitted: 407 
+Collisions: 213 
+Dropped: 7 
+
+p = 0.6, a = 7
+Throughput: 50.64 
+Average Delay: 469867.336493 
+Packets Transmitted: 422 
+Collisions: 248 
+Dropped: 8 
+
+p = 1.0, a = 7
+Throughput: 48.6 
+Average Delay: 477189.320988 
+Packets Transmitted: 405 
+Collisions: 289 
+Dropped: 12 
+
+p = 0.01, a = 8
+Throughput: 54.0 
+Average Delay: 479186.873333 
+Packets Transmitted: 450 
+Collisions: 488 
+Dropped: 29 
+
+p = 0.1, a = 8
+Throughput: 58.44 
+Average Delay: 490530.876797 
+Packets Transmitted: 487 
+Collisions: 253 
+Dropped: 7 
+
+p = 0.3, a = 8
+Throughput: 59.28 
+Average Delay: 472225.91498 
+Packets Transmitted: 494 
+Collisions: 339 
+Dropped: 11 
+
+p = 0.6, a = 8
+Throughput: 57.84 
+Average Delay: 483227.491701 
+Packets Transmitted: 482 
+Collisions: 402 
+Dropped: 19 
+
+p = 1.0, a = 8
+Throughput: 55.92 
+Average Delay: 484498.300429 
+Packets Transmitted: 466 
+Collisions: 269 
+Dropped: 10 
+
+p = 0.01, a = 9
+Throughput: 61.8 
+Average Delay: 477472.605825 
+Packets Transmitted: 515 
+Collisions: 572 
+Dropped: 35 
+
+p = 0.1, a = 9
+Throughput: 64.56 
+Average Delay: 467093.907063 
+Packets Transmitted: 538 
+Collisions: 444 
+Dropped: 19 
+
+p = 0.3, a = 9
+Throughput: 63.72 
+Average Delay: 479927.299435 
+Packets Transmitted: 531 
+Collisions: 344 
+Dropped: 19 
+
+p = 0.6, a = 9
+Throughput: 61.08 
+Average Delay: 478224.713163 
+Packets Transmitted: 509 
+Collisions: 392 
+Dropped: 16 
+
+p = 1.0, a = 9
+Throughput: 65.16 
+Average Delay: 477870.548803 
+Packets Transmitted: 543 
+Collisions: 304 
+Dropped: 14 
+
+p = 0.01, a = 10
+Throughput: 68.16 
+Average Delay: 488558.125 
+Packets Transmitted: 568 
+Collisions: 616 
+Dropped: 36 
+
+p = 0.1, a = 10
+Throughput: 68.64 
+Average Delay: 477422.243007 
+Packets Transmitted: 572 
+Collisions: 426 
+Dropped: 21 
+
+p = 0.3, a = 10
+Throughput: 71.4 
+Average Delay: 488228.215126 
+Packets Transmitted: 595 
+Collisions: 473 
+Dropped: 22 
+
+p = 0.6, a = 10
+Throughput: 71.16 
+Average Delay: 483271.986509 
+Packets Transmitted: 593 
+Collisions: 347 
+Dropped: 14 
+
+p = 1.0, a = 10
+Throughput: 67.08 
+Average Delay: 481034.11449 
+Packets Transmitted: 559 
+Collisions: 404 
+Dropped: 15 
+
+----- Finished test 3 -----

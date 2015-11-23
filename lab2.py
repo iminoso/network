@@ -188,14 +188,15 @@ class Simulator:
                                 prob = float(self.p)
                                 random_p = random.random()
                                 if random_p < prob:
-                                    network[node.dest].queue.append(i)
+                                    network[node.dest].queue.append(i - node.next_arrival)
                                     bus.block_line(node.id, node.dest, i)
                                     node.has_packet = False
                                     node.dest = None
                                     node.retry_ctr = 0
                                     self.transmitted_ctr += 1
                                 else:
-                                    print "tick:{} nodeid:{} prob:{} random_p:{}".format(i, node.id, prob, random_p)
+                                    # print "tick:{} nodeid:{} prob:{} random_p:{}".format(i, node.id, prob, random_p)
+                                    pass
                             else:
                                 network[node.dest].queue.append(i)
                                 bus.block_line(node.id, node.dest, i)
@@ -288,7 +289,7 @@ def test_2(ticks):
 def test_3(ticks):
     w = 1000000
     l = 15000
-    P3 = [0.6]
+    P3 = [0.01, 0.1, 0.3, 0.6, 1.0]
 
     A3 = range(11)[1:]
     N = 30
