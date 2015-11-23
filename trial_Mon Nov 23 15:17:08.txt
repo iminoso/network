@@ -1,0 +1,214 @@
+----- Running test 1 and 3 -----
+n = 20, a = 5
+Throughput: 24.6 
+Average Delay: 454654.326829 
+Packets Transmitted: 205 
+Collisions: 95 
+Dropped: 1 
+
+n = 20, a = 6
+Throughput: 29.52 
+Average Delay: 467368.552846 
+Packets Transmitted: 246 
+Collisions: 97 
+Dropped: 2 
+
+n = 20, a = 7
+Throughput: 31.44 
+Average Delay: 477970.290076 
+Packets Transmitted: 262 
+Collisions: 97 
+Dropped: 2 
+
+n = 40, a = 5
+Throughput: 45.24 
+Average Delay: 459981.241379 
+Packets Transmitted: 377 
+Collisions: 274 
+Dropped: 6 
+
+n = 40, a = 6
+Throughput: 57.24 
+Average Delay: 473966.958071 
+Packets Transmitted: 477 
+Collisions: 340 
+Dropped: 8 
+
+n = 40, a = 7
+Throughput: 64.92 
+Average Delay: 457857.22366 
+Packets Transmitted: 541 
+Collisions: 384 
+Dropped: 15 
+
+n = 60, a = 5
+Throughput: 68.88 
+Average Delay: 474117.789199 
+Packets Transmitted: 574 
+Collisions: 542 
+Dropped: 13 
+
+n = 60, a = 6
+Throughput: 85.2 
+Average Delay: 473016.171831 
+Packets Transmitted: 710 
+Collisions: 740 
+Dropped: 30 
+
+n = 60, a = 7
+Throughput: 93.24 
+Average Delay: 479166.624196 
+Packets Transmitted: 777 
+Collisions: 785 
+Dropped: 29 
+
+n = 80, a = 5
+Throughput: 94.8 
+Average Delay: 466495.665823 
+Packets Transmitted: 790 
+Collisions: 731 
+Dropped: 19 
+
+n = 80, a = 6
+Throughput: 105.6 
+Average Delay: 466696.370455 
+Packets Transmitted: 880 
+Collisions: 1327 
+Dropped: 58 
+
+n = 80, a = 7
+Throughput: 128.76 
+Average Delay: 470390.722274 
+Packets Transmitted: 1073 
+Collisions: 1388 
+Dropped: 59 
+
+n = 100, a = 5
+Throughput: 116.88 
+Average Delay: 461596.560575 
+Packets Transmitted: 974 
+Collisions: 1205 
+Dropped: 41 
+
+n = 100, a = 6
+Throughput: 139.2 
+Average Delay: 473075.860345 
+Packets Transmitted: 1160 
+Collisions: 1532 
+Dropped: 66 
+
+n = 100, a = 7
+Throughput: 157.08 
+Average Delay: 479595.840336 
+Packets Transmitted: 1309 
+Collisions: 2033 
+Dropped: 106 
+
+----- Finished test 1 and 3 -----
+----- Running test 2 and 4 -----
+n = 20, a = 4
+Throughput: 19.44 
+Average Delay: 451201.623457 
+Packets Transmitted: 162 
+Collisions: 79 
+Dropped: 1 
+
+n = 30, a = 4
+Throughput: 29.16 
+Average Delay: 465855.909465 
+Packets Transmitted: 243 
+Collisions: 153 
+Dropped: 2 
+
+n = 40, a = 4
+Throughput: 34.92 
+Average Delay: 445206.735395 
+Packets Transmitted: 291 
+Collisions: 267 
+Dropped: 6 
+
+n = 20, a = 8
+Throughput: 39.0 
+Average Delay: 490035.055385 
+Packets Transmitted: 325 
+Collisions: 133 
+Dropped: 5 
+
+n = 30, a = 8
+Throughput: 56.88 
+Average Delay: 469166.318565 
+Packets Transmitted: 474 
+Collisions: 303 
+Dropped: 14 
+
+n = 40, a = 8
+Throughput: 73.44 
+Average Delay: 474704.184641 
+Packets Transmitted: 612 
+Collisions: 438 
+Dropped: 19 
+
+n = 20, a = 12
+Throughput: 58.08 
+Average Delay: 482025.681818 
+Packets Transmitted: 484 
+Collisions: 210 
+Dropped: 10 
+
+n = 30, a = 12
+Throughput: 84.6 
+Average Delay: 483624.852482 
+Packets Transmitted: 705 
+Collisions: 642 
+Dropped: 38 
+
+n = 40, a = 12
+Throughput: 114.48 
+Average Delay: 489619.183438 
+Packets Transmitted: 954 
+Collisions: 893 
+Dropped: 50 
+
+n = 20, a = 16
+Throughput: 71.28 
+Average Delay: 489263.143098 
+Packets Transmitted: 594 
+Collisions: 363 
+Dropped: 20 
+
+n = 30, a = 16
+Throughput: 106.92 
+Average Delay: 497241.650954 
+Packets Transmitted: 891 
+Collisions: 913 
+Dropped: 58 
+
+n = 40, a = 16
+Throughput: 139.92 
+Average Delay: 488641.7753 
+Packets Transmitted: 1166 
+Collisions: 1408 
+Dropped: 86 
+
+n = 20, a = 20
+Throughput: 89.4 
+Average Delay: 497839.241611 
+Packets Transmitted: 745 
+Collisions: 715 
+Dropped: 46 
+
+n = 30, a = 20
+Throughput: 133.44 
+Average Delay: 489309.252698 
+Packets Transmitted: 1112 
+Collisions: 1203 
+Dropped: 73 
+
+n = 40, a = 20
+Throughput: 176.76 
+Average Delay: 501382.167006 
+Packets Transmitted: 1473 
+Collisions: 2533 
+Dropped: 173 
+
+----- Finished test 2 and 4 -----

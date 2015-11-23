@@ -227,12 +227,13 @@ def main(argv):
     test_2(ticks)
     text_file.write("----- Finished test 2 and 4 -----\n")
 
+
 def test_1(ticks):
     w = 1000000
     l = 15000
 
-    N1=[20, 40, 60, 80, 100]
-    A1=[5,6,7]
+    N1 = [20, 40, 60, 80, 100]
+    A1 = [5, 6, 7]
 
     print "----- Running test 1 and 3 -----"
     for n in N1:
@@ -250,9 +251,9 @@ def test_2(ticks):
     w = 1000000
     l = 15000
 
-    A2=[4, 8, 12, 16, 20]
-    N2=[20, 30, 40]
-    
+    A2 = [4, 8, 12, 16, 20]
+    N2 = [20, 30, 40]
+
     print "----- Running test 2 and 4 -----"
     for a in A2:
         for n in N2:
@@ -264,10 +265,11 @@ def test_2(ticks):
             text_file.write("\n")
     print "----- Finished test 2 and 4 -----"
 
+
 if __name__ == "__main__":
     format = "%a %b %d %H:%M:%S"
     today = datetime.datetime.today()
     s = today.strftime(format)
-    text_file = open("trial_{}.txt".format(s),"w")
+    text_file = open("trial_{}.txt".format(s), "w")
     main(sys.argv)
     text_file.close()
