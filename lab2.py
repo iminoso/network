@@ -131,7 +131,7 @@ class Node:
 
 
 class Simulator:
-    def __init__(self, number_computers, packet_rate, speed, packet_length, p):
+    def __init__(self, number_computers, packet_rate, speed, packet_length, p=None):
         self.number_computers = number_computers
         self.packet_rate = packet_rate
         self.speed = speed
@@ -183,12 +183,26 @@ class Simulator:
                     # if blocked prior, check if random wait time is complete
                     if i > node.random_wait_time and node.dest is not None:
                         if bus.is_line_open(node.id, node.dest):
-                            network[node.dest].queue.append(i)
-                            bus.block_line(node.id, node.dest, i)
-                            node.has_packet = False
-                            node.dest = None
-                            node.retry_ctr = 0
-                            self.transmitted_ctr += 1
+                            # checking if system is p persistent
+                            if self.p:
+                                prob = float(self.p)
+                                random_p = random.random()
+                                if random_p < prob:
+                                    network[node.dest].queue.append(i)
+                                    bus.block_line(node.id, node.dest, i)
+                                    node.has_packet = False
+                                    node.dest = None
+                                    node.retry_ctr = 0
+                                    self.transmitted_ctr += 1
+                                else:
+                                    print "tick:{} nodeid:{} prob:{} random_p:{}".format(i, node.id, prob, random_p)
+                            else:
+                                network[node.dest].queue.append(i)
+                                bus.block_line(node.id, node.dest, i)
+                                node.has_packet = False
+                                node.dest = None
+                                node.retry_ctr = 0
+                                self.transmitted_ctr += 1
                         else:
                             # bus is blocked here, add random waits
                             if node.backoff():
@@ -219,13 +233,18 @@ class Simulator:
 def main(argv):
     ticks = 1
 
-    text_file.write("----- Running test 1 and 3 -----\n")
-    test_1(ticks)
-    text_file.write("----- Finished test 1 and 3 -----\n")
+    if str(argv[1]) == 'p':
+        text_file.write("----- Running test 3 -----\n")
+        test_3(ticks)
+        text_file.write("----- Finished test 3 -----\n")
+    else:
+        text_file.write("----- Running test 1 and 3 -----\n")
+        test_1(ticks)
+        text_file.write("----- Finished test 1 and 3 -----\n")
 
-    text_file.write("----- Running test 2 and 4 -----\n")
-    test_2(ticks)
-    text_file.write("----- Finished test 2 and 4 -----\n")
+        text_file.write("----- Running test 2 and 4 -----\n")
+        test_2(ticks)
+        text_file.write("----- Finished test 2 and 4 -----\n")
 
 
 def test_1(ticks):
@@ -264,6 +283,26 @@ def test_2(ticks):
             print ""
             text_file.write("\n")
     print "----- Finished test 2 and 4 -----"
+
+
+def test_3(ticks):
+    w = 1000000
+    l = 15000
+    P3 = [0.6]
+
+    A3 = range(11)[1:]
+    N = 30
+
+    print "----- Running test 3 -----"
+    for a in A3:
+        for p in P3:
+            test = Simulator(N, a, w, l, p)
+            print "p = {}, a = {}".format(p, a)
+            text_file.write("p = {}, a = {}\n".format(p, a))
+            test.simulate(ticks)
+            print ""
+            text_file.write("\n")
+    print "----- Finished test 3 -----"
 
 
 if __name__ == "__main__":
